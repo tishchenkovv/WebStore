@@ -44,6 +44,18 @@ namespace WebStore
                 app.UseDeveloperExceptionPage();
             }
 
+
+            //Добавляем расширение для использования статических файлов, т.к. appsettings.json - это статический файл
+            app.UseStaticFiles();
+
+            //Добавляем обработку запросов в mvc-формате
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
             string textMsg = Configuration["CustomHelloWorld"];
 
             app.Run(async (context) =>
